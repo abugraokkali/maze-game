@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         }
         else {
             timer.text = "0";
+            time = 0;
         }
 
         if(right.position.x > transform.position.x && down.position.z < transform.position.z && left.position.x < transform.position.x && up.position.z > transform.position.z )
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
                 GameOver();
             }
             inside = false;
+            time = 0;
         }
     }
 
