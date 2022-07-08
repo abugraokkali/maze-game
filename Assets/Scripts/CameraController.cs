@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
 
         transform.position = target.transform.position - target.transform.forward * cameraDistance;
         transform.LookAt (target.transform.position);
-        transform.position = new Vector3 (transform.position.x, transform.position.y + 2.5f, transform.position.z);
+        transform.position = new Vector3 (transform.position.x, transform.position.y + 3.5f, transform.position.z);
   
         //transform.rotation = target.rotation;
 
