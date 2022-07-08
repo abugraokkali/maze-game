@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,18 +10,21 @@ public class PlayerController : MonoBehaviour
     public Transform down;
     public Transform left;
     public Transform up;
+    public Text timer;
 
     private bool inside = false;
+    private float time = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        timer.text = "0";
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
@@ -43,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
         if(right.position.x > transform.position.x && down.position.z < transform.position.z && left.position.x < transform.position.x && up.position.z > transform.position.z )
         {
+            Debug.Log("start");
             inside = true;
         }
         else {
@@ -50,6 +55,15 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("finish");
             }
             inside = false;
+        }
+
+        if(inside) {
+            time += Time.deltaTime;
+            int seconds =  (int)(time % 60);
+            timer.text = seconds + "";
+        }
+        else {
+            timer.text = "0";
         }
 
 
