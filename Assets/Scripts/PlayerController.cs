@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public Transform left;
     public Transform up;
     public Text timer;
+    
+    public GameOverScreen GameOverScreen;
 
     private bool inside = false;
     private float time = 0.0f;
@@ -45,18 +47,6 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector3.up * Time.deltaTime * speed);
         }
 
-        if(right.position.x > transform.position.x && down.position.z < transform.position.z && left.position.x < transform.position.x && up.position.z > transform.position.z )
-        {
-            Debug.Log("start");
-            inside = true;
-        }
-        else {
-            if(inside && up.position.z < transform.position.z) {
-                Debug.Log("finish");
-            }
-            inside = false;
-        }
-
         if(inside) {
             time += Time.deltaTime;
             int seconds =  (int)(time % 60);
@@ -66,7 +56,21 @@ public class PlayerController : MonoBehaviour
             timer.text = "0";
         }
 
+        if(right.position.x > transform.position.x && down.position.z < transform.position.z && left.position.x < transform.position.x && up.position.z > transform.position.z )
+        {
+            Debug.Log("start");
+            inside = true;
+        }
+        else {
+            if(inside && up.position.z < transform.position.z) {
+                Debug.Log("game over");
+                GameOver();
+            }
+            inside = false;
+        }
+    }
 
-
+    public void GameOver() {
+        GameOverScreen.Setup((int)time);
     }
 }
