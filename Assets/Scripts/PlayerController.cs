@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
+    public Transform right;
+    public Transform down;
+    public Transform left;
+    public Transform up;
+
+    private bool inside = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +40,19 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector3.up * Time.deltaTime * speed);
         }
+
+        if(right.position.x > transform.position.x && down.position.z < transform.position.z && left.position.x < transform.position.x && up.position.z > transform.position.z )
+        {
+            inside = true;
+        }
+        else {
+            if(inside && up.position.z < transform.position.z) {
+                Debug.Log("finish");
+            }
+            inside = false;
+        }
+
+
 
     }
 }
